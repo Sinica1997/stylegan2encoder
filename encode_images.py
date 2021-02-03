@@ -121,8 +121,15 @@ def main():
 
     perc_model = None
     if (args.use_lpips_loss > 0.00000001):
-        with dnnlib.util.open_url(args.vgg_url, cache_dir='.stylegan2-cache') as f:
-            perc_model = pickle.load(f)
+        #with dnnlib.util.open_url(args.vgg_url, cache_dir='.stylegan2-cache') as f:
+        #    perc_model = pickle.load(f)
+    
+        if dnnlib.util.is_url(args.vgg_url):
+            with dnnlib.util.open_url(args.vgg_url, cache_dir='.stylegan2-cache') as f:
+                perc_model = pickle.load(f)
+        else:
+            with open(args.vgg_url,'rb') as f:
+                perc_model = pickle.load(f)
 
     perceptual_model = PerceptualModel(args, perc_model=perc_model, batch_size=args.batch_size)
     perceptual_model.build_perceptual_model(generator, discriminator_network)
