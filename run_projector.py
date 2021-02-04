@@ -25,7 +25,7 @@ def project_image(proj, targets, png_prefix, num_snapshots):
     while proj.get_cur_step() < proj.num_steps:
         print('\r%d / %d ... ' % (proj.get_cur_step(), proj.num_steps), end='', flush=True)
         proj.step()
-        print(proj._dlatents_expr[0].numpy().shape())
+        print(np.array(proj._dlatents_expr[0]).shape())
         if proj.get_cur_step() in snapshot_steps:
             misc.save_image_grid(proj.get_images(), png_prefix + 'step%04d.png' % proj.get_cur_step(), drange=[-1,1])
             np.save( png_prefix+'step%04d.npy' % proj.get_cur_step(), proj._dlatents_expr[0].numpy())
