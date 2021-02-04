@@ -26,7 +26,10 @@ def project_image(proj, targets, png_prefix, num_snapshots):
     while proj.get_cur_step() < proj.num_steps:
         print('\r%d / %d ... ' % (proj.get_cur_step(), proj.num_steps), end='', flush=True)
         proj.step()
-        dlatent_code = proj._dlatents_expr.eval().copy()
+        dlatent_code = proj._dlatents_expr
+        print(help(dlatent_code))
+        print(type(dlatent_code))
+        dlatent_code = dlatent_code.eval().copy()
         print(dlatent_code)
         if proj.get_cur_step() in snapshot_steps:
             misc.save_image_grid(proj.get_images(), png_prefix + 'step%04d.png' % proj.get_cur_step(), drange=[-1,1])
