@@ -26,7 +26,7 @@ def project_image(proj, targets, png_prefix, num_snapshots):
         print('\r%d / %d ... ' % (proj.get_cur_step(), proj.num_steps), end='', flush=True)
         proj.step()
         dlatent_code = np.array(proj._dlatents_expr).copy
-        print(dlatent_code
+        print(dlatent_code)
         if proj.get_cur_step() in snapshot_steps:
          )
             np.save( png_prefix+'step%04d.npy' % proj.get_cur_step(), dlatent_code)
