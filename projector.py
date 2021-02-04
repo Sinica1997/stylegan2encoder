@@ -6,7 +6,6 @@
 
 import numpy as np
 import tensorflow as tf
-tf.config.run_functions_eagerly(True)
 import dnnlib
 import dnnlib.tflib as tflib
 
